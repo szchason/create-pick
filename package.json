@@ -1,0 +1,35 @@
+{
+  "name": "create-rcapp",
+  "version": "1.0.0",
+  "description": "Use to create a React project",
+  "type": "module",
+  "bin": {
+    "create-rcapp": "./index.js",
+    "rcapp": "./index.js"
+  },
+  "scripts": {
+    "test": "node index.js",
+    "dist": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szchason/create-rcapp.git"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "create-crapp",
+    "react"
+  ],
+  "author": "szchason",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/szchason/create-rcapp/issues"
+  },
+  "homepage": "https://github.com/szchason/create-rcapp#readme",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^10.0.1",
+    "rollup": "^3.5.1"
+  }
+}
