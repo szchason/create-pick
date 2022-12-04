@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "module": "ES6"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "main.ts",
+    "helper/*.ts"
+  ]
+}
