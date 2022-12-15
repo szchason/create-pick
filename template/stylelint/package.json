@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "lint-staged": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{scss,css}": "npx stylelint"
+  },
+  "devDependencies": {
+    "stylelint": "^14.13.0",
+    "stylelint-scss": "^4.3.0",
+    "@szchason/stylelint-config-css": "^0.0.1",
+    "@szchason/stylelint-config-scss": "^0.0.1"
+  }
+}

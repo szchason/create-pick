@@ -7,10 +7,12 @@
     ],
     "esModuleInterop": true,
     "moduleResolution": "Node",
-    "module": "ES6"
+    "module": "ESNext",
+    "resolveJsonModule": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "template/**/*"
   ],
   "include": [
     "main.ts",
