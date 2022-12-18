@@ -5,17 +5,22 @@
       "ESNext",
       "DOM"
     ],
+    "allowJs": true,
+    "checkJs": false,
+    "noEmit": false,
     "esModuleInterop": true,
     "moduleResolution": "Node",
     "module": "ESNext",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "sourceMap": false
   },
+  "include": [
+    "helper"
+  ],
   "exclude": [
     "node_modules",
-    "template/**/*"
   ],
-  "include": [
+  "files": [
     "main.ts",
-    "helper/*.ts"
   ]
 }

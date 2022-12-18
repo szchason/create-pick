@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import deepMerge from './deepMerge';
 
-function renderTemplate(src, dest) {
+function renderTemplate(src, dest) :void {
   const stats = fs.statSync(src);
   if(stats.isDirectory()) {
     if (path.basename(src) === 'node_modules') return;

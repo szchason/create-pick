@@ -1,17 +1,21 @@
 module.exports = {
   'extends': '@szchason/eslint-config-typescript',
   settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts'],
+    },
+    'import/extensions': [
+      '.js',
+      '.ts',
+      '.json',
+    ],
     'import/resolver': {
-      alias: {
-        extensions: [ '.js', '.ts' ],
+      typescript: {
+        alwaysTryTypes: true,
       },
     },
   },
   rules: {
-    'no-confusing-arrow': 0,
-    'no-nested-ternary': 0,
-    '@typescript-eslint/explicit-function-return-type': 0,
-    'import/no-unresolved': 0,
-    'import/default': 0,
+    '@typescript-eslint/no-extra-parens': 0,
   },
 };

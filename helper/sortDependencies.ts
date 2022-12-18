@@ -1,4 +1,4 @@
-export default function sortDependencies(packageJson) {
+export default function sortDependencies(packageJson) :Record<string, any> {
   const sorted = {};
 
   const depTypes = [

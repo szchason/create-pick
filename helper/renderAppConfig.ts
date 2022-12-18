@@ -2,11 +2,11 @@ import fs from 'node:fs';
 import path from 'path';
 import { stringify } from 'javascript-stringify';
 
-function stringifyJS(value) {
+function stringifyJS(value) :string {
   return stringify(value, null, 2);
 }
 
-function renderAppConfig(fullPath, ops :Record<string, any>) {
+function renderAppConfig(fullPath, ops :Record<string, any>) :void {
   const { isNeedTs } = ops;
   const appDefaultConfig = {
     serverPort: 9527,
@@ -15,7 +15,7 @@ function renderAppConfig(fullPath, ops :Record<string, any>) {
       {
         name: 'index',
         title: 'React App',
-        entry: `./public/index.${isNeedTs ? 'tsx' : 'jsx'}`,
+        entry: `./src/index.${isNeedTs ? 'tsx' : 'jsx'}`,
         template: './public/index.html',
         favicon: './public/favicon.ico',
       },

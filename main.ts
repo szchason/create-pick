@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import minimist from 'minimist';
 import prompts from 'prompts';
 import logSymbols from 'log-symbols';
@@ -52,13 +52,18 @@ async function init() :Promise<void> {
         },
         {
           name: 'shouldOverwrite',
-          type: () => canSkipEmptying(rootDir) ? null : 'confirm',
-          message: () => canSkipEmptying(rootDir) ? 'Current directory' : appDir ? projectDirExist(appDir) : directoryExist,
+          type: () => (canSkipEmptying(rootDir) ? null : 'confirm'),
+          message: () :string => {
+            if(canSkipEmptying(rootDir)) {
+              return appDir && projectDirExist(appDir);
+            }
+            return directoryExist;
+          },
           initial: true,
         },
         {
           name: 'overwriteChecker',
-          type: (shouldOverwrite :boolean) => {
+          type: (shouldOverwrite :boolean) :void => {
           // 不进行重新写操作取消
             if (shouldOverwrite === false) {
               cancelExit(`${red(logSymbols.warning)} ${red('Operation cancelled')}`);
@@ -68,24 +73,8 @@ async function init() :Promise<void> {
         },
         {
           name: 'needsTypeScript',
-          type: () => ts ? null : 'toggle',
+          type: () => (ts ? null : 'toggle'),
           message: 'Add TypeScript for Application development?',
-          initial: true,
-          active: 'Yes',
-          inactive: 'No',
-        },
-        {
-          name: 'needsRouter',
-          type: 'toggle',
-          message: 'Add React Router for Application development?',
-          initial: true,
-          active: 'Yes',
-          inactive: 'No',
-        },
-        {
-          name: 'needsToolkit',
-          type: 'toggle',
-          message: 'Add Toolkit for Application development?',
           initial: true,
           active: 'Yes',
           inactive: 'No',
@@ -121,10 +110,8 @@ async function init() :Promise<void> {
     shouldOverwrite,
     isCurrentDir,
     needsTypeScript,
-    needsRouter,
     needsStylelint,
     needsEslint,
-    needsToolkit,
   } = result;
   const appName = isCurrentDir ? path.basename(rootCwd) : appDir;
   if(shouldOverwrite) {
@@ -148,35 +135,18 @@ async function init() :Promise<void> {
   );
   const templateRoot = path.resolve(__dirname, 'template');
   const isNeedTs = ts || needsTypeScript;
-  const render = function render(templateName, nextDir = '/') {
+  function render(templateName, nextDir = '/') :void {
     const templateDir = path.resolve(templateRoot, templateName);
     renderTemplate(templateDir, `${rootDir}/${nextDir}`);
-  };
+  }
 
-  const templateSign = isNeedTs ? 'tsx' : 'jsx';
-
-  render('base');
-  render('code/default', '/src');
+  render('default');
   renderAppConfig(rootDir, { isNeedTs });
 
-  if(needsRouter && needsToolkit) {
-    render(`code/${templateSign}-toolkit-router`, '/src');
-  }
-
-  if(needsRouter && !needsToolkit) {
-    render(`code/${templateSign}-router`, '/src');
-  }
-
-  if(!needsRouter && needsToolkit) {
-    render(`code/${templateSign}-toolkit`, '/src');
-  }
-
-  if(!needsRouter && !needsToolkit) {
-    render(`code/${templateSign}`, '/src');
-  }
-
   if(isNeedTs) {
-    render('tsconfig');
+    render('template-react-ts');
+  } else {
+    render('template-react');
   }
 
   if(needsEslint) {

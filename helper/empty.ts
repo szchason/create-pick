@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export function canSkipEmptying(dir :string) :boolean {
   if (!fs.existsSync(dir)) {
@@ -11,14 +11,10 @@ export function canSkipEmptying(dir :string) :boolean {
     return true;
   }
 
-  if (files.length === 1 && files[0] === '.git') {
-    return true;
-  }
-
-  return false;
+  return files.length === 1 && files[0] === '.git';
 }
 
-export function emptyDir(dir) {
+export function emptyDir(dir) :void {
   if (!fs.existsSync(dir)) {
     return;
   }

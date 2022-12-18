@@ -1,12 +1,7 @@
-const isObject = (val) => val && typeof val === 'object';
-const mergeArrayWithDedupe = (a, b) => Array.from(new Set([ ...a, ...b ]));
+const isObject = (val) :boolean => val && typeof val === 'object';
+const mergeArrayWithDedupe = (a, b) :Record<string, any>[] => Array.from(new Set([ ...a, ...b ]));
 
-/**
- * Recursively merge the content of the new object to the existing one
- * @param {Object} target the existing object
- * @param {Object} obj the new object
- */
-function deepMerge(target, obj) {
+function deepMerge(target, obj) :string {
   for (const key of Object.keys(obj)) {
     const oldVal = target[key];
     const newVal = obj[key];

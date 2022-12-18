@@ -2,6 +2,7 @@ import typescript from '@rollup/plugin-typescript';
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json';
+import terser from '@rollup/plugin-terser';
 
 export default {
   input: './main.ts',
@@ -11,5 +12,5 @@ export default {
     strict: true,
     banner: '#! /usr/bin/env node\n',
   },
-  plugins: [resolve(),commonjs(),typescript(),json()]
+  plugins: [ resolve(), commonjs(), typescript(), json(), terser() ]
 }

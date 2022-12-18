@@ -1,11 +1,11 @@
 import path from 'node:path';
-import fs from 'fs';
+import fs from 'node:fs';
+import { stringify } from 'javascript-stringify';
 import sortDependencies from './sortDependencies';
 import deepMerge from './deepMerge';
-import { stringify } from 'javascript-stringify';
 import { devDependencies as eslintDeps } from '../package.json' assert { type: 'json' };
 
-function stringifyJS(value) {
+function stringifyJS(value) :string {
   return stringify(value, (val, indent, nextStringify) => {
     if(val === 'path.join(__dirname, "src")') {
       return val.replace(/'/g, '');
@@ -14,17 +14,21 @@ function stringifyJS(value) {
   }, 2);
 }
 
-function createESLintConfig({
-  needsTypescript,
-}) {
-  const pkg = { devDependencies: {} };
-  const addDependency = (name) => {
+function createESLintConfig({ needsTypescript }) :Record<string, any> {
+  const pkg = { devDependencies: {}, scripts: {} };
+
+  pkg.scripts = {
+    eslint: `npx eslint src/**/*.{${needsTypescript ? 'tsx,ts,jsx,js' : 'jsx,js'}}`,
+  };
+
+  const addDependency = (name) :void => {
     pkg.devDependencies[name] = eslintDeps[name];
   };
 
   if(needsTypescript) {
     addDependency('@typescript-eslint/eslint-plugin');
     addDependency('@typescript-eslint/parser');
+    addDependency('@szchason/eslint-config-typescript');
   }
 
   const defaultExtend = ['@szchason/eslint-config-react'];
@@ -36,6 +40,7 @@ function createESLintConfig({
     },
     env: {
       browser: true,
+      es6: true,
     },
     excludedFiles: ['./config.js'],
     extend: needsTypescript ? defaultExtend.concat(['@szchason/eslint-config-typescript']) : defaultExtend,
@@ -56,7 +61,7 @@ function createESLintConfig({
   };
 }
 
-function renderEslint(rootDir, { needsTypescript }) {
+function renderEslint(rootDir, { needsTypescript }) :void {
   const { pkg, eslintConfig } = createESLintConfig({ needsTypescript });
   const packageJsonPath = path.resolve(rootDir, 'package.json');
   const eslintPath = path.resolve(rootDir, '.eslintrc.js');
