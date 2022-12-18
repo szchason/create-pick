@@ -49,7 +49,7 @@ function createESLintConfig({ needsTypescript }) :Record<string, any> {
         alias: {
           map: [[ '@', 'path.join(__dirname, "src")' ]],
           extensions: needsTypescript
-            ? defaultExtensions.concat([ '.tsx', '.ts' ])
+            ? [ '.tsx', '.ts' ].concat(defaultExtensions)
             : defaultExtensions,
         },
       },
