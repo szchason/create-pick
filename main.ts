@@ -121,7 +121,6 @@ async function init() :Promise<void> {
   }
   console.log();
   console.log(`Creating a new React app in ${green(rootDir)}.`);
-  console.log();
   process.chdir(rootDir);
   const packageManager = getPackageManager();
   const packageJson = {

@@ -34,16 +34,14 @@ function createESLintConfig({ needsTypescript }) :Record<string, any> {
   const defaultExtend = ['@szchason/eslint-config-react'];
   const defaultExtensions = [ '.js', '.jsx' ];
   const eslintConfig = {
-    root: true,
-    globals: {
-      GLOBAL: true,
-    },
     env: {
       browser: true,
       es6: true,
     },
-    excludedFiles: ['./config.js'],
-    extend: needsTypescript ? defaultExtend.concat(['@szchason/eslint-config-typescript']) : defaultExtend,
+    globals: {
+      GLOBAL: true,
+    },
+    'extends': needsTypescript ? defaultExtend.concat(['@szchason/eslint-config-typescript']) : defaultExtend,
     settings: {
       'import/resolver': {
         alias: {
@@ -54,7 +52,6 @@ function createESLintConfig({ needsTypescript }) :Record<string, any> {
         },
       },
     },
-    rules: {},
   };
   return {
     pkg, eslintConfig,
@@ -68,7 +65,7 @@ function renderEslint(rootDir, { needsTypescript }) :void {
   const existingPkg = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
   const updatedPkg = sortDependencies(deepMerge(existingPkg, pkg));
   fs.writeFileSync(packageJsonPath, `${JSON.stringify(updatedPkg, null, 2)}\n`, 'utf-8');
-  const content = `module.export = ${stringifyJS(eslintConfig)}`;
+  const content = `module.exports = ${stringifyJS(eslintConfig)}`;
   const fileTitle = 'const path = require(\'path\');\n\n';
   fs.writeFileSync(eslintPath, fileTitle + content, 'utf-8');
 }
