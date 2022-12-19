@@ -11,6 +11,7 @@ import getPackageManager from './helper/getPackageManager';
 import renderTemplate from './helper/renderTemplate';
 import renderAppConfig from './helper/renderAppConfig';
 import renderEslint from './helper/renderEslint';
+import generateReadme from './helper/generateReadme';
 
 interface IResult {
   shouldOverwrite?: boolean;
@@ -156,6 +157,11 @@ async function init() :Promise<void> {
   if(needsStylelint) {
     render('stylelint');
   }
+
+  fs.writeFileSync(
+    path.resolve(rootDir, 'README.md'),
+    generateReadme({ projectName: appName, packageManager }),
+  );
 
   console.log('\nDone. Now run:\n');
   if (rootDir !== rootCwd) {
