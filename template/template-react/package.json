@@ -4,14 +4,14 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "dev": "rcapp dev",
-    "dist": "rcapp dist",
-    "build": "rcapp build"
+    "dev": "pick dev",
+    "dist": "pick dist",
+    "build": "pick build"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "rcapp-scripts": "^0.0.1",
+    "pick-scripts": "^0.0.1",
     "@babel/core": "^7.19.3",
     "@babel/plugin-transform-runtime": "^7.19.1",
     "@babel/preset-env": "^7.19.3",

@@ -1,19 +1,20 @@
 {
-  "name": "create-rcapp",
+  "name": "create-pick",
   "version": "0.0.1-alpha.01",
   "description": "Use to create a React project",
   "bin": {
-    "create-rcapp": "./index.js",
-    "rcapp": "./index.js"
+    "create-pick": "./index.js",
+    "pick": "./index.js"
   },
   "scripts": {
     "dist": "rollup -c --bundleConfigAsCjs",
     "eslint": "eslint **/*.{ts,js}",
-    "lint-staged": "npx lint-staged"
+    "lint-staged": "npx lint-staged",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/szchason/create-rcapp.git"
+    "url": "git+https://github.com/szchason/create-pick.git"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
@@ -23,15 +24,15 @@
     "index.js"
   ],
   "keywords": [
-    "create-rcapp",
+    "create-pick",
     "create-*"
   ],
   "author": "szchason",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/szchason/create-rcapp/issues"
+    "url": "https://github.com/szchason/create-pick/issues"
   },
-  "homepage": "https://github.com/szchason/create-rcapp#readme",
+  "homepage": "https://github.com/szchason/create-pick#readme",
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",

@@ -41,7 +41,7 @@ function generateReadme(ops :Record<string, any>) :string {
   + .stylelintrc.js // stylelintrc文件
   + config.js // 项目配置文件
   + globals.d.ts // 全局声明文件
-  + rcapp.config.js // 项目构建配置文件
+  + pick.config.js // 项目构建配置文件
   + tsconfig.json // tsconfig
   \`\`\`
   `;

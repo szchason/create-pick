@@ -22,7 +22,7 @@ function renderAppConfig(fullPath, ops :Record<string, any>) :void {
     ],
   };
   const content = `module.exports = ${stringifyJS(appDefaultConfig)}`;
-  fs.writeFileSync(path.resolve(fullPath, 'rcapp.config.js'), content, 'utf-8');
+  fs.writeFileSync(path.resolve(fullPath, 'pick.config.js'), content, 'utf-8');
 }
 
 export default renderAppConfig;
