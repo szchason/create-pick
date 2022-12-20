@@ -1,6 +1,6 @@
 {
   "name": "create-pick",
-  "version": "0.0.1-alpha.01",
+  "version": "0.0.1",
   "description": "Use to create a React project",
   "bin": {
     "create-pick": "./index.js",
